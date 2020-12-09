@@ -42,5 +42,5 @@ resource "github_actions_secret" "sa_key" {
 resource "github_actions_secret" "gcp_project_id" {
   repository       = "wissenschaftsbefreiungsfront"
   secret_name      = "GCP_PROJECT_ID"
-  plaintext_value  = data.google_project.project.id
+  plaintext_value  = basename(data.google_project.project.id)
 }
