@@ -5,6 +5,13 @@ provider "google" {
 
 provider "github" {}
 
+data "google_project" "project" {
+}
+
+data "github_actions_public_key" "example_public_key" {
+  repository = "wissenschaftsbefreiungsfront"
+}
+
 resource "google_project_service" "iam" {
   service = "iam.googleapis.com"
 }
@@ -26,12 +33,14 @@ resource "google_service_account_key" "gh_actions" {
   service_account_id = google_service_account.gh_actions.name
 }
 
-data "github_actions_public_key" "example_public_key" {
-  repository = "wissenschaftsbefreiungsfront"
+resource "github_actions_secret" "sa_key" {
+  repository       = "wissenschaftsbefreiungsfront"
+  secret_name      = "GCP_SA_KEY"
+  plaintext_value  = google_service_account_key.gh_actions.private_key
 }
 
-resource "github_actions_secret" "example_secret" {
+resource "github_actions_secret" "gcp_project_id" {
   repository       = "wissenschaftsbefreiungsfront"
-  secret_name      = "GOOGLE_APPLICATION_CREDENTIALS"
-  plaintext_value  = google_service_account_key.gh_actions.private_key
+  secret_name      = "GCP_PROJECT_ID"
+  plaintext_value  = data.google_project.project.number
 }
