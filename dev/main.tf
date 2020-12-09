@@ -63,6 +63,9 @@ resource "google_cloud_run_service" "wbf_dev" {
     spec {
       containers {
         image = "gcr.io/${basename(data.google_project.project.id)}/wbf:latest"
+        ports {
+          container_port = 80
+        }
       }
     }
   }
