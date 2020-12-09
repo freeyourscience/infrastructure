@@ -8,6 +8,8 @@ provider "github" {}
 data "google_project" "project" {
 }
 
+resource "google_container_registry" "registry" {}
+
 data "github_actions_public_key" "example_public_key" {
   repository = "wissenschaftsbefreiungsfront"
 }
