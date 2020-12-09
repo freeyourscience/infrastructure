@@ -18,6 +18,10 @@ resource "google_project_service" "iam" {
   service = "iam.googleapis.com"
 }
 
+resource "google_project_service" "iam" {
+  service = "containerregistry.googleapis.com"
+}
+
 resource "google_service_account" "gh_actions" {
   account_id   = "gh-actions"
   display_name = "GH Actions"
