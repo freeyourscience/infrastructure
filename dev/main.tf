@@ -50,3 +50,21 @@ resource "github_actions_secret" "gcp_project_id" {
   secret_name      = "GCP_PROJECT_ID"
   plaintext_value  = basename(data.google_project.project.id)
 }
+
+resource "google_cloud_run_service" "wbf_dev" {
+  name     = "wbf-dev"
+  location = "us-west1"
+
+  template {
+    spec {
+      containers {
+        image = "gcr.io/${basename(data.google_project.project.id)}/wbf"
+      }
+    }
+  }
+
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+}
