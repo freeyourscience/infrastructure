@@ -62,7 +62,7 @@ resource "google_cloud_run_service" "wbf_dev" {
   template {
     spec {
       containers {
-        image = "gcr.io/${basename(data.google_project.project.id)}/wbf"
+        image = "gcr.io/${basename(data.google_project.project.id)}/wbf:latest"
       }
     }
   }
