@@ -63,6 +63,18 @@ resource "github_actions_secret" "gcp_project_id" {
   plaintext_value  = basename(data.google_project.project.id)
 }
 
+resource "github_actions_secret" "gcp_cloudrun_service" {
+  repository       = "wissenschaftsbefreiungsfront"
+  secret_name      = "GCP_CLOUDRUN_SERVICE"
+  plaintext_value  = "wbf-dev"
+}
+
+resource "github_actions_secret" "gcp_region" {
+  repository       = "wissenschaftsbefreiungsfront"
+  secret_name      = "GCP_REGION"
+  plaintext_value  = "us-west1"
+}
+
 resource "google_cloud_run_service" "wbf_dev" {
   name     = "wbf-dev"
   location = "us-west1"
