@@ -31,8 +31,16 @@ resource "google_service_account" "gh_actions" {
   display_name = "GH Actions"
 }
 
-resource "google_project_iam_binding" "gh_actions" {
+resource "google_project_iam_binding" "gh_actions_storage" {
   role = "roles/storage.admin"
+
+  members = [
+    "serviceAccount:${google_service_account.gh_actions.email}",
+  ]
+}
+
+resource "google_project_iam_binding" "gh_actions_cloudrun" {
+  role = "roles/run.admin"
 
   members = [
     "serviceAccount:${google_service_account.gh_actions.email}",
