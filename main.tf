@@ -8,12 +8,23 @@ provider "github" {}
 data "google_project" "project" {
 }
 
-module "gcp_registry" {
-  source = "./modules/gcp_registry"
+module "project_services" {
+  source  = "terraform-google-modules/project-factory/google//modules/project_services"
+  version = "3.3.0"
+
+  project_id = "your-project-id"
+  activate_apis = [
+    "iam.googleapis.com",
+    "containerregistry.googleapis.com",
+    "run.googleapis.com",
+  ]
+
+  disable_services_on_destroy = false
+  disable_dependent_services  = false
 }
 
-module "gcp_apis" {
-  source = "./modules/gcp_apis"
+module "gcp_registry" {
+  source = "./modules/gcp_registry"
 }
 
 module "gcp_sa_gh_actions" {
@@ -47,22 +58,4 @@ resource "github_actions_secret" "gcp_region" {
   repository      = "wissenschaftsbefreiungsfront"
   secret_name     = "GCP_REGION"
   plaintext_value = "us-west1"
-}
-
-resource "google_project_service" "iam" {
-  service = "iam.googleapis.com"
-  disable_dependent_services = false
-  disable_on_destroy         = false
-}
-
-resource "google_project_service" "gcr" {
-  service = "containerregistry.googleapis.com"
-  disable_dependent_services = false
-  disable_on_destroy         = false
-}
-
-resource "google_project_service" "run" {
-  service = "run.googleapis.com"
-  disable_dependent_services = false
-  disable_on_destroy         = false
 }
