@@ -5,7 +5,7 @@ locals {
 data "google_project" "project" {}
 
 data "github_actions_public_key" "example_public_key" {
-  repository = locals.repo_name
+  repository = local.repo_name
 }
 
 resource "github_actions_secret" "non_sensitive" {
@@ -15,19 +15,19 @@ resource "github_actions_secret" "non_sensitive" {
     GCP_REGION           = "us-west1"
     API_EMAIL            = "team@paywall.lol"
   }
-  repository      = locals.repo_name
+  repository      = local.repo_name
   secret_name     = each.key
   plaintext_value = each.value
 }
 
 resource "github_actions_secret" "sa_key" {
-  repository      = locals.repo_name
+  repository      = local.repo_name
   secret_name     = "GCP_SA_KEY"
   plaintext_value = var.sa_key
 }
 
 resource "github_actions_secret" "sherpa_api_key" {
-  repository      = locals.repo_name
+  repository      = local.repo_name
   secret_name     = "SHERPA_API_KEY"
   plaintext_value = var.sherpa_api_key
 }
