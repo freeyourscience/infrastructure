@@ -32,6 +32,7 @@ module "gcp_sa_gh_actions" {
 module "gh_wbf_repo_secrets" {
   source = "./modules/gh_wbf_repo_secrets"
   sa_key = module.gcp_sa_gh_actions.sa_key
+  sherpa_api_key = var.sherpa_api_key
 }
 
 module "gcp_domainmapping_dev" {
