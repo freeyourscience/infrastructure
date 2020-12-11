@@ -5,7 +5,7 @@ provider "google" {
 }
 
 provider "github" {
-  version =  "4.1.0"
+  version = "4.1.0"
 }
 
 resource "google_project_service" "service" {
@@ -17,7 +17,7 @@ resource "google_project_service" "service" {
 
   service = each.key
 
-  disable_on_destroy = false
+  disable_on_destroy         = false
   disable_dependent_services = false
 }
 
@@ -30,8 +30,8 @@ module "gcp_sa_gh_actions" {
 }
 
 module "gh_wbf_repo_secrets" {
-  source = "./modules/gh_wbf_repo_secrets"
-  sa_key = module.gcp_sa_gh_actions.sa_key
+  source         = "./modules/gh_wbf_repo_secrets"
+  sa_key         = module.gcp_sa_gh_actions.sa_key
   sherpa_api_key = var.sherpa_api_key
 }
 
