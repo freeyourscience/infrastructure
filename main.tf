@@ -30,3 +30,7 @@ module "gh_wbf_repo_secrets" {
   source = "./modules/gh_wbf_repo_secrets"
   sa_key = module.gcp_sa_gh_actions.sa_key
 }
+
+module "gcp_domainmapping_dev" {
+  source = "./modules/gcp_domainmapping_dev"
+}
