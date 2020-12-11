@@ -5,10 +5,12 @@ provider "google" {
 
 provider "github" {}
 
-data "google_project" "project" {
+module "gcp_registry" {
+  source = "./modules/gcp_registry"
 }
 
-resource "google_container_registry" "registry" {}
+data "google_project" "project" {
+}
 
 data "github_actions_public_key" "example_public_key" {
   repository = "wissenschaftsbefreiungsfront"
