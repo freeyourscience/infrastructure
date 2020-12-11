@@ -1,11 +1,21 @@
+terraform {
+  required_providers {
+    google = {
+      version = "3.50.0"
+    }
+    github = {
+      version = "4.1.0"
+    }
+  }
+}
+
+
 provider "google" {
   project = "stunning-oasis-298115"
   region  = "us-west1"
-  version = "3.50.0"
 }
 
 provider "github" {
-  version = "4.1.0"
 }
 
 resource "google_project_service" "service" {
