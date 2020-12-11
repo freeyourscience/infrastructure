@@ -62,25 +62,25 @@ resource "google_service_account_key" "gh_actions" {
 }
 
 resource "github_actions_secret" "sa_key" {
-  repository       = "wissenschaftsbefreiungsfront"
-  secret_name      = "GCP_SA_KEY"
-  plaintext_value  = google_service_account_key.gh_actions.private_key
+  repository      = "wissenschaftsbefreiungsfront"
+  secret_name     = "GCP_SA_KEY"
+  plaintext_value = google_service_account_key.gh_actions.private_key
 }
 
 resource "github_actions_secret" "gcp_project_id" {
-  repository       = "wissenschaftsbefreiungsfront"
-  secret_name      = "GCP_PROJECT_ID"
-  plaintext_value  = basename(data.google_project.project.id)
+  repository      = "wissenschaftsbefreiungsfront"
+  secret_name     = "GCP_PROJECT_ID"
+  plaintext_value = basename(data.google_project.project.id)
 }
 
 resource "github_actions_secret" "gcp_cloudrun_service" {
-  repository       = "wissenschaftsbefreiungsfront"
-  secret_name      = "GCP_CLOUDRUN_SERVICE"
-  plaintext_value  = "wbf-dev"
+  repository      = "wissenschaftsbefreiungsfront"
+  secret_name     = "GCP_CLOUDRUN_SERVICE"
+  plaintext_value = "wbf-dev"
 }
 
 resource "github_actions_secret" "gcp_region" {
-  repository       = "wissenschaftsbefreiungsfront"
-  secret_name      = "GCP_REGION"
-  plaintext_value  = "us-west1"
+  repository      = "wissenschaftsbefreiungsfront"
+  secret_name     = "GCP_REGION"
+  plaintext_value = "us-west1"
 }
