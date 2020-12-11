@@ -16,18 +16,6 @@ data "github_actions_public_key" "example_public_key" {
   repository = "wissenschaftsbefreiungsfront"
 }
 
-resource "google_project_service" "iam" {
-  service = "iam.googleapis.com"
-}
-
-resource "google_project_service" "gcr" {
-  service = "containerregistry.googleapis.com"
-}
-
-resource "google_project_service" "run" {
-  service = "run.googleapis.com"
-}
-
 resource "google_service_account" "gh_actions" {
   account_id   = "gh-actions"
   display_name = "GH Actions"
