@@ -9,6 +9,10 @@ module "gcp_registry" {
   source = "./modules/gcp_registry"
 }
 
+module "gcp_apis" {
+  source = "./modules/gcp_apis"
+}
+
 data "google_project" "project" {
 }
 
