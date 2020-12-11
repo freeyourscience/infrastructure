@@ -19,4 +19,7 @@ Once tf has run successfully the pipeline in the repo should be able to push ima
 
 - the service account doing the apply needs to be an owner of the domain
   - verify ownership by adding txt record (get code from search console or webmaster tool)
-  - use google.com/webmaster to add them
+  - use google.com/webmaster to add the service account as owner
+- and CNAME record to point domain at cloud run
+  - check the tf state for relevant entry or Cloud Run Domain mappings in the console
+  - add record (in our case `CNAME ghs.googlehosted.com.`)
