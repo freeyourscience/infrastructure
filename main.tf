@@ -8,19 +8,17 @@ provider "github" {}
 data "google_project" "project" {
 }
 
-module "project_services" {
-  source  = "terraform-google-modules/project-factory/google//modules/project_services"
-  version = "3.3.0"
-
-  project_id = "your-project-id"
-  activate_apis = [
+resource "google_project_service" "service" {
+  for_each = toset([
     "iam.googleapis.com",
     "containerregistry.googleapis.com",
     "run.googleapis.com",
-  ]
+  ])
 
-  disable_services_on_destroy = false
-  disable_dependent_services  = false
+  service = each.key
+
+  disable_on_destroy = false
+  disable_dependent_services = false
 }
 
 module "gcp_registry" {
