@@ -1,9 +1,12 @@
 provider "google" {
   project = "stunning-oasis-298115"
   region  = "us-west1"
+  version = "3.50.0"
 }
 
-provider "github" {}
+provider "github" {
+  version =  "4.1.0"
+}
 
 resource "google_project_service" "service" {
   for_each = toset([
