@@ -14,3 +14,9 @@ terraform code for the Wissenschaftsbefreiungsfront
 4. manually enable the `Cloud Resource Manager` API so that tf can enable the other ones
 
 Once tf has run successfully the pipeline in the repo should be able to push images to the registry.
+
+## Managing domains for Cloud Run for externally managed domains
+
+- the service account doing the apply needs to be an owner of the domain
+  - verify ownership by adding txt record (get code from search console or webmaster tool)
+  - use google.com/webmaster to add them
