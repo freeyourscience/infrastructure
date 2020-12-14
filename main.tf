@@ -50,6 +50,7 @@ module "gh_wbf_repo_secrets" {
   cloudrun_svc_dev = local.cloudrun_svc_dev
   sa_key           = module.gcp_sa_gh_actions.sa_key
   sherpa_api_key   = var.sherpa_api_key
+  s2_api_key   = var.s2_api_key
   domain_name      = local.domain_name
   gcp_region       = local.gcp_region
   gcp_project      = local.gcp_project

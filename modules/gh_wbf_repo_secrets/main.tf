@@ -29,3 +29,9 @@ resource "github_actions_secret" "sherpa_api_key" {
   secret_name     = "SHERPA_API_KEY"
   plaintext_value = var.sherpa_api_key
 }
+
+resource "github_actions_secret" "s2_api_key" {
+  repository      = local.repo_name
+  secret_name     = "S2_API_KEY"
+  plaintext_value = var.s2_api_key
+}

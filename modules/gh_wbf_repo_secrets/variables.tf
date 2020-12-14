@@ -12,6 +12,11 @@ variable "sherpa_api_key" {
   sensitive   = true
 }
 
+variable "s2_api_key" {
+  description = "API key for partner.semanticscholar.org/v1"
+  sensitive   = true
+}
+
 variable "domain_name" {
   description = "base domain to use"
 }
