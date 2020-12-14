@@ -62,3 +62,9 @@ module "gcp_domainmapping_dev" {
   gcp_region  = local.gcp_region
   gcp_project = local.gcp_project
 }
+
+module "gcp_monitoring" {
+  source      = "./modules/gcp_monitoring"
+  domain_name = local.domain_name
+  gcp_project = local.gcp_project
+}
