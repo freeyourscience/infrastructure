@@ -1,7 +1,7 @@
 data "google_project" "project" {}
-resource "google_cloud_run_domain_mapping" "dev_paywall_lol" {
+resource "google_cloud_run_domain_mapping" "dev" {
   location = "us-west1"
-  name     = "dev.paywall.lol"
+  name     = "dev.freeyourscience.org"
 
   spec {
     route_name = "wbf-dev"
