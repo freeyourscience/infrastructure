@@ -9,10 +9,16 @@ terraform {
   }
 }
 
+locals {
+  gcp_region       = "us-west1"
+  gcp_project      = "stunning-oasis-298115"
+  domain_name      = "freeyourscience.org"
+  cloudrun_svc_dev = "wbf-dev"
+}
 
 provider "google" {
-  project = "stunning-oasis-298115"
-  region  = "us-west1"
+  project = local.gcp_project
+  region  = local.gcp_region
 }
 
 provider "github" {
@@ -40,11 +46,19 @@ module "gcp_sa_gh_actions" {
 }
 
 module "gh_wbf_repo_secrets" {
-  source         = "./modules/gh_wbf_repo_secrets"
-  sa_key         = module.gcp_sa_gh_actions.sa_key
-  sherpa_api_key = var.sherpa_api_key
+  source           = "./modules/gh_wbf_repo_secrets"
+  cloudrun_svc_dev = local.cloudrun_svc_dev
+  sa_key           = module.gcp_sa_gh_actions.sa_key
+  sherpa_api_key   = var.sherpa_api_key
+  domain_name      = local.domain_name
+  gcp_region       = local.gcp_region
+  gcp_project      = local.gcp_project
 }
 
 module "gcp_domainmapping_dev" {
-  source = "./modules/gcp_domainmapping_dev"
+  source      = "./modules/gcp_domainmapping_dev"
+  domain_name = local.domain_name
+  dev_route   = local.cloudrun_svc_dev
+  gcp_region  = local.gcp_region
+  gcp_project = local.gcp_project
 }

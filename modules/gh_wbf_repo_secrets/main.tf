@@ -2,18 +2,16 @@ locals {
   repo_name = "wissenschaftsbefreiungsfront"
 }
 
-data "google_project" "project" {}
-
 data "github_actions_public_key" "example_public_key" {
   repository = local.repo_name
 }
 
 resource "github_actions_secret" "non_sensitive" {
   for_each = {
-    GCP_PROJECT_ID       = basename(data.google_project.project.id)
-    GCP_CLOUDRUN_SERVICE = "wbf-dev"
-    GCP_REGION           = "us-west1"
-    API_EMAIL            = "team@paywall.lol"
+    GCP_PROJECT_ID       = var.gcp_project
+    GCP_CLOUDRUN_SERVICE = var.cloudrun_svc_dev
+    GCP_REGION           = var.gcp_region
+    API_EMAIL            = "team@${var.domain_name}"
   }
   repository      = local.repo_name
   secret_name     = each.key

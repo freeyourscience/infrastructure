@@ -1,13 +1,12 @@
-data "google_project" "project" {}
 resource "google_cloud_run_domain_mapping" "dev" {
-  location = "us-west1"
-  name     = "dev.freeyourscience.org"
+  location = var.gcp_region
+  name     = "dev.${var.domain_name}"
 
   spec {
-    route_name = "wbf-dev"
+    route_name = var.dev_route
   }
 
   metadata {
-    namespace = basename(data.google_project.project.id)
+    namespace = var.gcp_project
   }
 }
