@@ -87,8 +87,5 @@ resource "google_monitoring_alert_policy" "error_ratio" {
     comparison = "COMPARISON_GT"
     thresholdValue = 0.0
     duration = "0s"
-    trigger = {
-        "count": 1
-    }
   }
 }
