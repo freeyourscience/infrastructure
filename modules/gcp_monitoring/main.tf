@@ -71,20 +71,20 @@ resource "google_monitoring_alert_policy" "error_ratio" {
   conditions {
     display_name = "Ratio: 5xx count / total response count"
     condition_threshold {
-      filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\""
+      filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" AND metric.label.service_name=\"wbf-dev\" AND metric.label.response_code_class=\"5xx\""
       aggregations {
         alignment_period     = "300s"
         cross_series_reducer = "REDUCE_SUM"
         per_series_aligner   = "ALIGN_DELTA"
       }
-      denominator_filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" "
+      denominator_filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" AND metric.label.service_name=\"wbf-dev\" "
       denominator_aggregations {
         alignment_period     = "300s"
         cross_series_reducer = "REDUCE_SUM"
         per_series_aligner   = "ALIGN_DELTA"
       }
       comparison      = "COMPARISON_GT"
-      threshold_value = 1.0
+      threshold_value = 0.0
       duration        = "0s"
     }
   }
