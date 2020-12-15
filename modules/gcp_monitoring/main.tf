@@ -42,6 +42,14 @@ resource "google_monitoring_uptime_check_config" "paper_api" {
   }
 }
 
+resource "google_monitoring_notification_channel" "team" {
+  display_name = "Team@fyscience"
+  type         = "email"
+  labels = {
+    email_address = "team@freeyourscience.org"
+  }
+}
+
 resource "google_monitoring_alert_policy" "uptime_checks" {
   display_name = "Availability -- Uptime Checks"
   combiner     = "OR"
@@ -59,10 +67,7 @@ resource "google_monitoring_alert_policy" "uptime_checks" {
       filter     = "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" AND ( metric.label.check_id=\"${google_monitoring_uptime_check_config.landingpage_https.name}\" OR metric.label.check_id=\"${google_monitoring_uptime_check_config.paper_api.name}\") AND resource.type=\"uptime_url\""
     }
   }
-
-  user_labels = {
-    foo = "bar"
-  }
+  notification_channels = [ google_monitoring_notification_channel.team.name ]
 }
 
 resource "google_monitoring_alert_policy" "error_ratio" {
@@ -88,4 +93,5 @@ resource "google_monitoring_alert_policy" "error_ratio" {
       duration        = "0s"
     }
   }
+  notification_channels = [ google_monitoring_notification_channel.team.name ]
 }
