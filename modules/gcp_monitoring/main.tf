@@ -63,7 +63,7 @@ resource "google_monitoring_alert_policy" "uptime_checks" {
         group_by_fields      = ["resource.label.*"]
       }
       comparison = "COMPARISON_GT"
-      duration   = "900s"
+      duration   = "90s"
       filter     = "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" AND resource.type=\"uptime_url\""
     }
   }
