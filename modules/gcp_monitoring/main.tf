@@ -70,20 +70,14 @@ resource "google_monitoring_alert_policy" "uptime_checks" {
   notification_channels = [ google_monitoring_notification_channel.team.name ]
 }
 
-resource "google_monitoring_alert_policy" "error_ratio" {
-  display_name = "Availability -- 5xx Code Ratio"
+resource "google_monitoring_alert_policy" "server_errors" {
+  display_name = "Availability -- 5xx Responses"
   combiner     = "OR"
   conditions {
-    display_name = "Ratio: 5xx count / total response count"
+    display_name = "5xx response count"
     condition_threshold {
-      filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" AND resource.label.service_name=\"wbf-dev\" AND metric.label.response_code_class=\"4xx\""
+      filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" AND resource.label.service_name=\"wbf-dev\" AND metric.label.response_code_class=\"5xx\""
       aggregations {
-        alignment_period     = "300s"
-        cross_series_reducer = "REDUCE_SUM"
-        per_series_aligner   = "ALIGN_DELTA"
-      }
-      denominator_filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" AND resource.label.service_name=\"wbf-dev\" "
-      denominator_aggregations {
         alignment_period     = "300s"
         cross_series_reducer = "REDUCE_SUM"
         per_series_aligner   = "ALIGN_DELTA"
