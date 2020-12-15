@@ -56,7 +56,7 @@ resource "google_monitoring_alert_policy" "uptime_checks" {
       }
       comparison = "COMPARISON_GT"
       duration   = "900s"
-      filter     = "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" AND ( metric.label.check_id=\"${google_monitoring_uptime_check_config.landingpage_https.name}\" OR metric.label.check_id=\"${google_monitoring_uptime_check_config.paper_api.name}\")"
+      filter     = "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" AND ( metric.label.check_id=\"${google_monitoring_uptime_check_config.landingpage_https.name}\" OR metric.label.check_id=\"${google_monitoring_uptime_check_config.paper_api.name}\") AND resource.type=\"uptime_url\""
     }
   }
 
