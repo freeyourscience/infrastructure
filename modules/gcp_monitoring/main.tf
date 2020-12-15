@@ -67,25 +67,25 @@ resource "google_monitoring_alert_policy" "uptime_checks" {
 
 resource "google_monitoring_alert_policy" "error_ratio" {
   display_name = "Availability -- 5xx Code Ratio"
-  combiner = "OR"
+  combiner     = "OR"
   conditions {
     display_name = "Ratio: 5xx count / total response count"
     condition_threshold {
       filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" AND resource.service_name=\"wbf-dev\" AND metric.response_code_class=\"5xx\""
       aggregations {
-        alignment_period = "300s"
+        alignment_period     = "300s"
         cross_series_reducer = "REDUCE_SUM"
-        per_series_aligner = "ALIGN_DELTA"
+        per_series_aligner   = "ALIGN_DELTA"
       }
+      denominator_filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" AND resource.service_name=\"wbf-dev\" "
+      denominator_aggregations {
+        alignment_period     = "300s"
+        cross_series_reducer = "REDUCE_SUM"
+        per_series_aligner   = "ALIGN_DELTA"
+      }
+      comparison      = "COMPARISON_GT"
+      threshold_value = 0.0
+      duration        = "0s"
     }
-    denominator_filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" AND resource.service_name=\"wbf-dev\" "
-    denominator_aggregations {
-      alignment_period = "300s"
-      cross_series_reducer = "REDUCE_SUM"
-      per_series_aligner = "ALIGN_DELTA"
-    }
-    comparison = "COMPARISON_GT"
-    thresholdValue = 0.0
-    duration = "0s"
   }
 }
