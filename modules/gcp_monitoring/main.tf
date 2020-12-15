@@ -27,7 +27,7 @@ resource "google_monitoring_uptime_check_config" "paper_api" {
 
   http_check {
     path         = "/papers?doi=+10.7554%2FeLife.07157"
-    port         = "443"
+    port         = "4443"
     use_ssl      = true
     validate_ssl = true
   }
@@ -76,7 +76,7 @@ resource "google_monitoring_alert_policy" "error_ratio" {
   conditions {
     display_name = "Ratio: 5xx count / total response count"
     condition_threshold {
-      filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" AND resource.label.service_name=\"wbf-dev\" AND metric.label.response_code_class=\"5xx\""
+      filter = "resource.type=\"cloud_run_revision\" AND metric.type=\"run.googleapis.com/request_count\" AND resource.label.service_name=\"wbf-dev\" AND metric.label.response_code_class=\"4xx\""
       aggregations {
         alignment_period     = "300s"
         cross_series_reducer = "REDUCE_SUM"
