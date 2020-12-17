@@ -8,10 +8,11 @@ data "github_actions_public_key" "example_public_key" {
 
 resource "github_actions_secret" "non_sensitive" {
   for_each = {
-    GCP_PROJECT_ID       = var.gcp_project
-    GCP_CLOUDRUN_SERVICE = var.cloudrun_svc_dev
-    GCP_REGION           = var.gcp_region
-    API_EMAIL            = "team@${var.domain_name}"
+    GCP_PROJECT_ID           = var.gcp_project
+    GCP_CLOUDRUN_SERVICE     = var.cloudrun_svc_dev
+    GCP_CLOUDRUN_SERVICE_DEV = var.cloudrun_svc_dev
+    GCP_REGION               = var.gcp_region
+    API_EMAIL                = "team@${var.domain_name}"
   }
   repository      = local.repo_name
   secret_name     = each.key

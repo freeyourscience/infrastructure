@@ -2,6 +2,10 @@ variable "cloudrun_svc_dev" {
   description = "Name of the cloudrun service for the dev deployment."
 }
 
+variable "cloudrun_svc" {
+  description = "Name of the production cloudrun service."
+}
+
 variable "sa_key" {
   description = "Key for the service account to be used by the github actions"
   sensitive   = true

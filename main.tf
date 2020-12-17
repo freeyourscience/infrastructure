@@ -13,6 +13,7 @@ locals {
   gcp_region       = "us-west1"
   gcp_project      = "stunning-oasis-298115"
   domain_name      = "freeyourscience.org"
+  cloudrun_svc     = "wbf"
   cloudrun_svc_dev = "wbf-dev"
 }
 
@@ -47,6 +48,7 @@ module "gcp_sa_gh_actions" {
 
 module "gh_wbf_repo_secrets" {
   source           = "./modules/gh_wbf_repo_secrets"
+  cloudrun_svc     = local.cloudrun_svc
   cloudrun_svc_dev = local.cloudrun_svc_dev
   sa_key           = module.gcp_sa_gh_actions.sa_key
   sherpa_api_key   = var.sherpa_api_key
@@ -56,9 +58,10 @@ module "gh_wbf_repo_secrets" {
   gcp_project      = local.gcp_project
 }
 
-module "gcp_domainmapping_dev" {
-  source      = "./modules/gcp_domainmapping_dev"
+module "gcp_domainmapping" {
+  source      = "./modules/gcp_domainmapping"
   domain_name = local.domain_name
+  route       = local.cloudrun_svc
   dev_route   = local.cloudrun_svc_dev
   gcp_region  = local.gcp_region
   gcp_project = local.gcp_project

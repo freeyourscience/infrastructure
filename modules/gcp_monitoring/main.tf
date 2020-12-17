@@ -67,7 +67,7 @@ resource "google_monitoring_alert_policy" "uptime_checks" {
       filter     = "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" AND resource.type=\"uptime_url\""
     }
   }
-  notification_channels = [ google_monitoring_notification_channel.team.name ]
+  notification_channels = [google_monitoring_notification_channel.team.name]
 }
 
 resource "google_monitoring_alert_policy" "server_errors" {
@@ -87,5 +87,5 @@ resource "google_monitoring_alert_policy" "server_errors" {
       duration        = "0s"
     }
   }
-  notification_channels = [ google_monitoring_notification_channel.team.name ]
+  notification_channels = [google_monitoring_notification_channel.team.name]
 }

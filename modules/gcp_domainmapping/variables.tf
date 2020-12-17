@@ -1,5 +1,9 @@
+variable "route" {
+  description = "Name of the CloudRun service"
+}
+
 variable "dev_route" {
-  description = "Name of the CloudRun service to attach the domain to."
+  description = "Name of the dev CloudRun service"
 }
 
 variable "domain_name" {
