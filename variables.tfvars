@@ -1,0 +1,5 @@
+gcp_region       = "us-west1"
+gcp_project      = "stunning-oasis-298115"
+domain_name      = "freeyourscience.org"
+cloudrun_svc     = "wbf"
+cloudrun_svc_dev = "wbf-dev"

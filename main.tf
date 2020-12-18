@@ -9,17 +9,9 @@ terraform {
   }
 }
 
-locals {
-  gcp_region       = "us-west1"
-  gcp_project      = "stunning-oasis-298115"
-  domain_name      = "freeyourscience.org"
-  cloudrun_svc     = "wbf"
-  cloudrun_svc_dev = "wbf-dev"
-}
-
 provider "google" {
-  project = local.gcp_project
-  region  = local.gcp_region
+  project = var.gcp_project
+  region  = var.gcp_region
 }
 
 provider "github" {
@@ -48,27 +40,27 @@ module "gcp_sa_gh_actions" {
 
 module "gh_wbf_repo_secrets" {
   source           = "./modules/gh_wbf_repo_secrets"
-  cloudrun_svc     = local.cloudrun_svc
-  cloudrun_svc_dev = local.cloudrun_svc_dev
+  cloudrun_svc     = var.cloudrun_svc
+  cloudrun_svc_dev = var.cloudrun_svc_dev
   sa_key           = module.gcp_sa_gh_actions.sa_key
   sherpa_api_key   = var.sherpa_api_key
   s2_api_key       = var.s2_api_key
-  domain_name      = local.domain_name
-  gcp_region       = local.gcp_region
-  gcp_project      = local.gcp_project
+  domain_name      = var.domain_name
+  gcp_region       = var.gcp_region
+  gcp_project      = var.gcp_project
 }
 
 module "gcp_domainmapping" {
   source      = "./modules/gcp_domainmapping"
-  domain_name = local.domain_name
-  route       = local.cloudrun_svc
-  dev_route   = local.cloudrun_svc_dev
-  gcp_region  = local.gcp_region
-  gcp_project = local.gcp_project
+  domain_name = var.domain_name
+  route       = var.cloudrun_svc
+  dev_route   = var.cloudrun_svc_dev
+  gcp_region  = var.gcp_region
+  gcp_project = var.gcp_project
 }
 
 module "gcp_monitoring" {
   source      = "./modules/gcp_monitoring"
-  domain_name = local.domain_name
-  gcp_project = local.gcp_project
+  domain_name = var.domain_name
+  gcp_project = var.gcp_project
 }
