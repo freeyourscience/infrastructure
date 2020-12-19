@@ -1,5 +1,5 @@
 locals {
-  repo_name = "wissenschaftsbefreiungsfront"
+  repo_name = "freeyourscience/freeyourscience"
 }
 
 data "github_actions_public_key" "example_public_key" {
