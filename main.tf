@@ -38,18 +38,6 @@ module "gcp_sa_gh_actions" {
   source = "./modules/gcp_sa_gh_actions"
 }
 
-module "gh_wbf_repo_secrets" {
-  source           = "./modules/gh_wbf_repo_secrets"
-  cloudrun_svc     = var.cloudrun_svc
-  cloudrun_svc_dev = var.cloudrun_svc_dev
-  sa_key           = module.gcp_sa_gh_actions.sa_key
-  sherpa_api_key   = var.sherpa_api_key
-  s2_api_key       = var.s2_api_key
-  domain_name      = var.domain_name
-  gcp_region       = var.gcp_region
-  gcp_project      = var.gcp_project
-}
-
 module "gcp_domainmapping" {
   source      = "./modules/gcp_domainmapping"
   domain_name = var.domain_name
