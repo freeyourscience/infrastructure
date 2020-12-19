@@ -38,8 +38,8 @@ module "gcp_sa_gh_actions" {
   source = "./modules/gcp_sa_gh_actions"
 }
 
-module "gh_wbf_repo_secrets" {
-  source           = "./modules/gh_wbf_repo_secrets"
+module "gh_fyscience_repo_secrets" {
+  source           = "./modules/gh_fyscience_repo_secrets"
   cloudrun_svc     = var.cloudrun_svc
   cloudrun_svc_dev = var.cloudrun_svc_dev
   sa_key           = module.gcp_sa_gh_actions.sa_key
