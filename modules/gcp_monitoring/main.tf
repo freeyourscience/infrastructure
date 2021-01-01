@@ -15,7 +15,7 @@ resource "google_monitoring_uptime_check_config" "landingpage_https" {
 
     labels = {
       project_id = var.gcp_project
-      host       = "dev.${var.domain_name}"
+      host       = "${var.domain_name}"
     }
   }
 }
@@ -37,7 +37,7 @@ resource "google_monitoring_uptime_check_config" "paper_api" {
 
     labels = {
       project_id = var.gcp_project
-      host       = "dev.${var.domain_name}"
+      host       = "${var.domain_name}"
     }
   }
 }
