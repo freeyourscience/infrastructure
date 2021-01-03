@@ -15,13 +15,13 @@ resource "google_monitoring_uptime_check_config" "landingpage_https" {
 
     labels = {
       project_id = var.gcp_project
-      host       = "${var.domain_name}"
+      host       = var.domain_name
     }
   }
 }
 
-resource "google_monitoring_uptime_check_config" "paper_api" {
-  display_name = "paperpage-https-uptime-check"
+resource "google_monitoring_uptime_check_config" "search_api" {
+  display_name = "searchpage-https-uptime-check"
   timeout      = "20s"
   period       = "900s"
 
@@ -37,7 +37,7 @@ resource "google_monitoring_uptime_check_config" "paper_api" {
 
     labels = {
       project_id = var.gcp_project
-      host       = "${var.domain_name}"
+      host       = var.domain_name
     }
   }
 }
