@@ -38,6 +38,10 @@ module "gcp_sa_gh_actions" {
   source = "./modules/gcp_sa_gh_actions"
 }
 
+module "gh_membership" {
+  source = "./modules/gh_membership"
+}
+
 module "gh_fyscience_repo_secrets" {
   source           = "./modules/gh_fyscience_repo_secrets"
   cloudrun_svc     = var.cloudrun_svc
