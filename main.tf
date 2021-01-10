@@ -23,6 +23,7 @@ provider "github" {
 resource "google_project_service" "service" {
   for_each = toset([
     "iam.googleapis.com",
+    "cloudbilling.googleapis.com",
     "containerregistry.googleapis.com",
     "run.googleapis.com",
   ])
