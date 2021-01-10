@@ -34,12 +34,17 @@ resource "google_project_service" "service" {
 }
 
 module "gcp_registry" {
-  source = "./modules/gcp_registry"
+  source     = "./modules/gcp_registry"
   depends_on = [google_project_service.service]
 }
 
 module "gcp_sa_gh_actions" {
-  source = "./modules/gcp_sa_gh_actions"
+  source     = "./modules/gcp_sa_gh_actions"
+  depends_on = [google_project_service.service]
+}
+
+module "gcp_sa_cloudrun" {
+  source     = "./modules/gcp_sa_cloudrun"
   depends_on = [google_project_service.service]
 }
 
@@ -47,6 +52,7 @@ module "gh_fyscience_repo_secrets" {
   source           = "./modules/gh_fyscience_repo_secrets"
   cloudrun_svc     = var.cloudrun_svc
   cloudrun_svc_dev = var.cloudrun_svc_dev
+  cloudrun_sa_email = module.gcp_sa_cloudrun.sa_email
   sa_key           = module.gcp_sa_gh_actions.sa_key
   sherpa_api_key   = var.sherpa_api_key
   s2_api_key       = var.s2_api_key
@@ -57,7 +63,7 @@ module "gh_fyscience_repo_secrets" {
 
 module "gcp_domainmapping" {
   source      = "./modules/gcp_domainmapping"
-  depends_on = [google_project_service.service]
+  depends_on  = [google_project_service.service]
   domain_name = var.domain_name
   route       = var.cloudrun_svc
   dev_route   = var.cloudrun_svc_dev

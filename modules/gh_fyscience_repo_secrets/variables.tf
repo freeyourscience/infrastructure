@@ -6,6 +6,10 @@ variable "cloudrun_svc" {
   description = "Name of the production cloudrun service."
 }
 
+variable "cloudrun_sa_email" {
+  description = "Email of the service account to assing to the cloudrun service"
+}
+
 variable "sa_key" {
   description = "Key for the service account to be used by the github actions"
   sensitive   = true
