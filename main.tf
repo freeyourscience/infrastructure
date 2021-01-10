@@ -36,10 +36,12 @@ resource "google_project_service" "service" {
 
 module "gcp_registry" {
   source = "./modules/gcp_registry"
+  depends_on = [google_project_service.service]
 }
 
 module "gcp_sa_gh_actions" {
   source = "./modules/gcp_sa_gh_actions"
+  depends_on = [google_project_service.service]
 }
 
 module "gh_fyscience_repo_secrets" {
@@ -56,6 +58,7 @@ module "gh_fyscience_repo_secrets" {
 
 module "gcp_domainmapping" {
   source      = "./modules/gcp_domainmapping"
+  depends_on = [google_project_service.service]
   domain_name = var.domain_name
   route       = var.cloudrun_svc
   dev_route   = var.cloudrun_svc_dev
@@ -71,5 +74,6 @@ module "gcp_monitoring" {
 
 module "gcp_budget" {
   source      = "./modules/gcp_budget"
+  depends_on = [google_project_service.service]
   gcp_project = var.gcp_project
 }
