@@ -12,6 +12,7 @@ resource "github_actions_secret" "non_sensitive" {
     GCP_CLOUDRUN_SERVICE     = var.cloudrun_svc
     GCP_CLOUDRUN_SERVICE_DEV = var.cloudrun_svc_dev
     GCP_REGION               = var.gcp_region
+    GCP_SERVICEACCOUNT_EMAIL = var.cloudrun_sa_email
     API_EMAIL                = "team@${var.domain_name}"
   }
   repository      = local.repo_name
