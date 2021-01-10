@@ -23,7 +23,6 @@ provider "github" {
 resource "google_project_service" "service" {
   for_each = toset([
     "iam.googleapis.com",
-    "cloudbilling.googleapis.com",
     "containerregistry.googleapis.com",
     "run.googleapis.com",
   ])
@@ -69,11 +68,5 @@ module "gcp_domainmapping" {
 module "gcp_monitoring" {
   source      = "./modules/gcp_monitoring"
   domain_name = var.domain_name
-  gcp_project = var.gcp_project
-}
-
-module "gcp_budget" {
-  source      = "./modules/gcp_budget"
-  depends_on = [google_project_service.service]
   gcp_project = var.gcp_project
 }
