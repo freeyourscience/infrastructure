@@ -3,6 +3,9 @@ terraform {
     google = {
       version = "3.50.0"
     }
+    google-beta = {
+      version = "3.51.1"
+    }
     github = {
       version = "4.1.0"
     }
@@ -62,5 +65,10 @@ module "gcp_domainmapping" {
 module "gcp_monitoring" {
   source      = "./modules/gcp_monitoring"
   domain_name = var.domain_name
+  gcp_project = var.gcp_project
+}
+
+module "gcp_budget" {
+  source      = "./modules/gcp_budget"
   gcp_project = var.gcp_project
 }
