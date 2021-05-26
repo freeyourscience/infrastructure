@@ -49,16 +49,16 @@ module "gcp_sa_cloudrun" {
 }
 
 module "gh_fyscience_repo_secrets" {
-  source           = "./modules/gh_fyscience_repo_secrets"
-  cloudrun_svc     = var.cloudrun_svc
-  cloudrun_svc_dev = var.cloudrun_svc_dev
+  source            = "./modules/gh_fyscience_repo_secrets"
+  cloudrun_svc      = var.cloudrun_svc
+  cloudrun_svc_dev  = var.cloudrun_svc_dev
   cloudrun_sa_email = module.gcp_sa_cloudrun.sa_email
-  sa_key           = module.gcp_sa_gh_actions.sa_key
-  sherpa_api_key   = var.sherpa_api_key
-  s2_api_key       = var.s2_api_key
-  domain_name      = var.domain_name
-  gcp_region       = var.gcp_region
-  gcp_project      = var.gcp_project
+  sa_key            = module.gcp_sa_gh_actions.sa_key
+  sherpa_api_key    = var.sherpa_api_key
+  s2_api_key        = var.s2_api_key
+  domain_name       = var.domain_name
+  gcp_region        = var.gcp_region
+  gcp_project       = var.gcp_project
 }
 
 module "gcp_domainmapping" {
