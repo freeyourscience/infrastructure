@@ -76,3 +76,7 @@ module "gcp_monitoring" {
   domain_name = var.domain_name
   gcp_project = var.gcp_project
 }
+
+module "gcp_log_retention" {
+  source = "./modules/gcp_log_retention"
+}
