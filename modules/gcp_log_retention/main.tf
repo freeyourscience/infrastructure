@@ -4,8 +4,8 @@ resource "google_storage_bucket" "log-bucket" {
 }
 
 resource "google_logging_project_sink" "instance-sink" {
-  name        = "prod-sink"
+  name        = "prod-sink-to-archive-bucket"
   description = "Longterm retentention of production logs"
   destination = "storage.googleapis.com/${google_storage_bucket.log-bucket.name}"
-  filter      = "resource.type = cloud_run_revision AND resource.labels.service_name = prod AND"
+  filter      = "resource.type = cloud_run_revision AND resource.labels.service_name = prod"
 }
