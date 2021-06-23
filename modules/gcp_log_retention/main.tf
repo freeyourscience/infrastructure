@@ -9,3 +9,11 @@ resource "google_logging_project_sink" "instance-sink" {
   destination = "storage.googleapis.com/${google_storage_bucket.log-bucket.name}"
   filter      = "resource.type = cloud_run_revision AND resource.labels.service_name = prod"
 }
+
+resource "google_storage_bucket_iam_binding" "binding" {
+  bucket = google_storage_bucket.log-bucket.name
+  role   = "roles/storage.objectCreator"
+  members = [
+    "serviceAccount:cloud-logs@system.gserviceaccount.com",
+  ]
+}
